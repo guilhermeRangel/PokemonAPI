@@ -9,12 +9,42 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
 
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        
+        if let url = URL(string: "https://api.pokemontcg.io/v1/cards"){
+            let task = URLSession.shared.dataTask(with: url) { (data, request, err) in
+                if err == nil{
+                    if let dadosRetorno = data {
+                        var poke = try? JSONDecoder().decode(TopLevel.self, from: dadosRetorno)
+                        //print(poke?.cards)
+                        
+                        for p in poke!.cards {
+                           // print(p.name)
+                        
+                            //self.namesAndImg.append(Card(id: p.id!, name: p.name!, imageUrl: p.imageUrl!))
+                            
+                        }
+                        
+                    }
+                }
+                
+                
+                
+                
+                
+            }
+            
+            task.resume()
+            
+        }
     }
 
-
+    
 }
 

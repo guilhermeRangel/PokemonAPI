@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7049602222651DD400A4944F /* Pokemon-Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7049601D2265157700A4944F /* Pokemon-Solid.ttf */; };
+		704960232265277A00A4944F /* Pokemon-Hollow.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 704960252265277A00A4944F /* Pokemon-Hollow.ttf */; };
+		704960272265351900A4944F /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 704960262265351900A4944F /* image.png */; };
 		CF2EA7B72261251F00A5C806 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2EA7B62261251F00A5C806 /* AppDelegate.swift */; };
 		CF2EA7B92261251F00A5C806 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2EA7B82261251F00A5C806 /* ViewController.swift */; };
 		CF2EA7BC2261251F00A5C806 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2EA7BA2261251F00A5C806 /* Main.storyboard */; };
@@ -18,6 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7049601D2265157700A4944F /* Pokemon-Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pokemon-Solid.ttf"; path = "../../../../../Downloads/pokemon/Pokemon-Solid.ttf"; sourceTree = "<group>"; };
+		704960242265277A00A4944F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = "Base.lproj/Pokemon-Hollow.ttf"; sourceTree = "<group>"; };
+		704960262265351900A4944F /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image.png; path = ../../../../image.png; sourceTree = "<group>"; };
 		CF2EA7B32261251F00A5C806 /* nanoAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nanoAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF2EA7B62261251F00A5C806 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF2EA7B82261251F00A5C806 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +73,9 @@
 				CF2EA7BA2261251F00A5C806 /* Main.storyboard */,
 				CF2EA7BD2261252000A5C806 /* Assets.xcassets */,
 				CF2EA7BF2261252000A5C806 /* LaunchScreen.storyboard */,
+				704960252265277A00A4944F /* Pokemon-Hollow.ttf */,
+				704960262265351900A4944F /* image.png */,
+				7049601D2265157700A4944F /* Pokemon-Solid.ttf */,
 				CF2EA7C22261252000A5C806 /* Info.plist */,
 			);
 			path = nanoAPI;
@@ -76,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				CF2EA7CB2264ECDF00A5C806 /* Card.swift */,
+				CF2EA7B82261251F00A5C806 /* ViewController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -83,7 +93,6 @@
 		CF2EA7C92261253A00A5C806 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				CF2EA7B82261251F00A5C806 /* ViewController.swift */,
 				CF2EA7CF22650CC800A5C806 /* CardDetails.swift */,
 			);
 			path = Controller;
@@ -156,8 +165,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF2EA7C12261252000A5C806 /* LaunchScreen.storyboard in Resources */,
+				704960232265277A00A4944F /* Pokemon-Hollow.ttf in Resources */,
+				7049602222651DD400A4944F /* Pokemon-Solid.ttf in Resources */,
 				CF2EA7BE2261252000A5C806 /* Assets.xcassets in Resources */,
 				CF2EA7BC2261251F00A5C806 /* Main.storyboard in Resources */,
+				704960272265351900A4944F /* image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +191,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		704960252265277A00A4944F /* Pokemon-Hollow.ttf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				704960242265277A00A4944F /* Base */,
+			);
+			name = "Pokemon-Hollow.ttf";
+			path = ../../../../../Downloads/pokemon;
+			sourceTree = "<group>";
+		};
 		CF2EA7BA2261251F00A5C806 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -318,7 +339,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TYNC5NT5U5;
 				INFOPLIST_FILE = nanoAPI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -335,7 +358,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TYNC5NT5U5;
 				INFOPLIST_FILE = nanoAPI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

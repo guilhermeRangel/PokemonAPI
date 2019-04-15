@@ -17,6 +17,14 @@ class CardDetails: UIViewController{
     
     
     override func viewWillAppear(_ animated: Bool) {
+        
+//        for family in UIFont.familyNames.sorted() {
+//            let names = UIFont.fontNames(forFamilyName: family)
+//            print("Family: \(family) Font names: \(names)")
+//        }
+        
+        
+        
         cardName.text = card?.name
     }
 }

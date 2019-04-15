@@ -9,17 +9,14 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    
-    
-    var cards: [Card] = []
 
-    @IBOutlet weak var tableView: UITableView!
+    var cards: [Card] = []
     
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -29,35 +26,21 @@ class ViewController: UIViewController {
                 if err == nil{
                     if let dadosRetorno = data {
                         var poke = try? JSONDecoder().decode(TopLevel.self, from: dadosRetorno)
-                        //print(poke?.cards)
-                        
-                        
+
                         for p in poke!.cards {
-                           // print(p.name)
-                            
-                            
                             self.cards.append(p)
-                            //self.namesAndImg.append(Card(id: p.id!, name: p.name!, imageUrl: p.imageUrl!))
                             
-                        }
+                            }
                         
                         DispatchQueue.main.async { self.tableView.reloadData() }
                     }
                 }
-                
-
-                
-                
-                
-                
-            
-                
-                
             }
             
             task.resume()
             
         }
+        print(cards.count)
     
         
     }
@@ -81,7 +64,7 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-        print(cards.count)
+        
         return cards.count
 
     }
@@ -92,15 +75,22 @@ extension ViewController: UITableViewDataSource {
 
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let custonFont = UIFont(name: "PokemonSolidNormal", size: UIFont.labelFontSize) else { fatalError()}
 
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonCell") as? tableCell else {
             return UITableViewCell()
         }
 
         let card = cards[indexPath.row]
-
+        
+        
+        
+        cell.nameLabel.font = UIFontMetrics.default.scaledFont(for: custonFont)
+        cell.nameLabel.adjustsFontForContentSizeCategory = true
         
          cell.nameLabel?.text = card.name
+        
+        
         cell.cardImage.image = UIImage()
         
         let url = URL(string: card.imageUrl!)

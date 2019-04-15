@@ -13,6 +13,8 @@ struct TopLevel: Codable {
     var cards: [Card]
 }
 
+
+
 struct Card: Codable {
     var id:String? //
     var name:String? //

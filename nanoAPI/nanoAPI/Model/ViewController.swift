@@ -75,8 +75,7 @@ extension ViewController: UITableViewDataSource {
 
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let custonFont = UIFont(name: "PokemonSolidNormal", size: UIFont.labelFontSize) else { fatalError()}
-
+       
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonCell") as? tableCell else {
             return UITableViewCell()
         }
@@ -85,10 +84,7 @@ extension ViewController: UITableViewDataSource {
         
         
         
-        cell.nameLabel.font = UIFontMetrics.default.scaledFont(for: custonFont)
-        cell.nameLabel.adjustsFontForContentSizeCategory = true
-        
-         cell.nameLabel?.text = card.name
+        //cell.nameLabel?.text = card.name
         
         
         cell.cardImage.image = UIImage()

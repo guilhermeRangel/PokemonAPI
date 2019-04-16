@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CardDetails: UIViewController{
+class CardDetails: UITableViewController{
     
     
     var card: Card?

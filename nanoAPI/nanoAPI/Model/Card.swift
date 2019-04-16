@@ -35,11 +35,19 @@ struct Card: Codable {
     var series:String? //
     var set:String? //
     var setCode:String? //
+    var ability:ability?
     var attacks:[attacks]?
     var resistances:[resistances]?
     var weaknesses:[weaknesses]?
     
 }
+
+struct ability: Codable {
+    var name: String
+    var text: String
+    var type: String
+}
+
 
 struct attacks: Codable {
     var cost:[String]?

@@ -78,7 +78,6 @@
 			isa = PBXGroup;
 			children = (
 				CF2EA7CB2264ECDF00A5C806 /* Card.swift */,
-				CF2EA7B82261251F00A5C806 /* ViewController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -86,6 +85,7 @@
 		CF2EA7C92261253A00A5C806 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CF2EA7B82261251F00A5C806 /* ViewController.swift */,
 				CF2EA7CF22650CC800A5C806 /* CardDetails.swift */,
 			);
 			path = Controller;

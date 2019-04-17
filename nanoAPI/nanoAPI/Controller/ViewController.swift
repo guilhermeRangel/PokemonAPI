@@ -73,9 +73,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                             self.tableCollectionView.reloadData()
                             self.tableCollection2.reloadData()
                             self.tableCollection3.reloadData()
-                            self.titleCollection1.text = "Pokemon 1"
-                            self.titleCollection2.text = "Pokemon 2"
-                            self.titleCollection3.text = "Pokemon 3"
                         }
                         
                     }
@@ -118,8 +115,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let card2 = cards2[indexPath.row]
             cell.imgImage.image = UIImage()
             let url = URL(string: card2.imageUrl!)
-            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-            cell.imgImage.image = UIImage(data: data!)
+            DispatchQueue.global(qos: .background).async {
+                let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+                DispatchQueue.main.async {
+                    self.titleCollection1.text = "Rarest"
+                    self.titleCollection2.text = "Limited Edition"
+                    self.titleCollection3.text = "Last releases"
+                    cell.imgImage.image = UIImage(data: data!)
+                }
+            }
             
             return cell
 
@@ -130,9 +134,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let card = cards[indexPath.row]
             cell.imgImage.image = UIImage()
             let url = URL(string: card.imageUrl!)
-            let data = try? Data(contentsOf: url!)
-            cell.imgImage.image = UIImage(data: data!)
-            
+            DispatchQueue.global(qos: .background).async {
+                let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+                DispatchQueue.main.async {
+                    cell.imgImage.image = UIImage(data: data!)
+                }
+            }
             return cell
             
         } else {
@@ -143,8 +150,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             cell.imgImage.image = UIImage()
 
             let url = URL(string: card3.imageUrl!)
-            let data = try? Data(contentsOf: url!)
-            cell.imgImage.image = UIImage(data: data!)
+            DispatchQueue.global(qos: .background).async {
+                let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+                DispatchQueue.main.async {
+                    cell.imgImage.image = UIImage(data: data!)
+                }
+            }
             
             return cell
             

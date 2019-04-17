@@ -21,9 +21,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var titleCollection1: UILabel!
     @IBOutlet weak var titleCollection2: UILabel!
     @IBOutlet weak var titleCollection3: UILabel!
+    @IBOutlet weak var progressBar: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        progressBar.startAnimating()
 
         tableCollectionView.delegate = self
         tableCollectionView.dataSource = self
@@ -73,6 +76,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                             self.tableCollectionView.reloadData()
                             self.tableCollection2.reloadData()
                             self.tableCollection3.reloadData()
+                            
+                            self.progressBar.stopAnimating()
+                            
+                            self.progressBar.isHidden = true
                         }
                         
                     }
@@ -94,13 +101,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == tableCollectionView{
-            print(cards.count)
             return cards.count
         }else if collectionView == tableCollection2 {
-            print(cards2.count)
             return cards2.count
         }else  {
-            print(cards3.count)
             return cards3.count
         }
     

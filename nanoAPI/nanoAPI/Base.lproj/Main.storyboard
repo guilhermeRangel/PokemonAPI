@@ -438,12 +438,20 @@
                                 <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="I9H-8b-T1k">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="I9H-8b-T1k" firstAttribute="centerY" secondItem="2vz-hR-UDb" secondAttribute="centerY" id="f3B-pp-geI"/>
+                            <constraint firstItem="I9H-8b-T1k" firstAttribute="centerX" secondItem="2vz-hR-UDb" secondAttribute="centerX" id="ptS-G8-uQd"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="vKK-q1-4Gc"/>
                     </view>
                     <navigationItem key="navigationItem" id="6ef-5U-GdS"/>
                     <connections>
+                        <outlet property="progressBar" destination="I9H-8b-T1k" id="GYP-mW-zqt"/>
                         <outlet property="tableCollection2" destination="CDD-e3-daa" id="Ezj-Rb-wsb"/>
                         <outlet property="tableCollection3" destination="jlP-Nm-uPe" id="CAg-Jf-7tZ"/>
                         <outlet property="tableCollectionView" destination="hWI-7u-OMr" id="NQ3-eT-Y8d"/>

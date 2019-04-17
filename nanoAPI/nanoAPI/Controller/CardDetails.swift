@@ -9,7 +9,7 @@
 import UIKit
 
 class CardDetails: UITableViewController{
-    
+
     
     var card: Card?
     

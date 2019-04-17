@@ -11,11 +11,11 @@ import UIKit
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     var cards: [Card] = []
-    
+    var cards2: [Card] = []
+    var cards3: [Card] = []
+    var i:Int = 1
     @IBOutlet weak var tableCollectionView: UICollectionView!
-    
     @IBOutlet weak var tableCollection2: UICollectionView!
-    
     @IBOutlet weak var tableCollection3: UICollectionView!
     
     @IBOutlet weak var titleCollection1: UILabel!
@@ -34,22 +34,37 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         tableCollection3.delegate = self
         tableCollection3.dataSource = self
         
-        if let url = URL(string: "https://api.pokemontcg.io/v1/cards"){
+       
+       request()
+        i = i+1
+        request()
+        i = i+1
+        
+    }
+    
+    
+    func request(){
+        if let url = URL(string: "https://api.pokemontcg.io/v1/cards?page=\(i)"){
             let task = URLSession.shared.dataTask(with: url) { (data, request, err) in
                 if err == nil{
                     if let dadosRetorno = data {
                         let poke = try? JSONDecoder().decode(TopLevel.self, from: dadosRetorno)
-
+                        
                         for p in poke!.cards {
                             
                             if p.nationalPokedexNumber != nil {
-                                if p.nationalPokedexNumber! < 200  {
+                                if p.nationalPokedexNumber! <= 50  {
+        
                                     self.cards.append(p)
                                     
+                                }else if (p.nationalPokedexNumber! > 50 && p.nationalPokedexNumber! < 101){
+                                    self.cards2.append(p)
+                                }else if (p.nationalPokedexNumber! > 100 ){
+                                    self.cards3.append(p)
                                 }
                             }
                             
-                            }
+                        }
                         
                         
                         
@@ -62,7 +77,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                             self.titleCollection2.text = "Pokemon 2"
                             self.titleCollection3.text = "Pokemon 3"
                         }
-
+                        
                     }
                 }
             }
@@ -70,9 +85,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             task.resume()
             
         }
-        print(cards.count)
-    
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -84,113 +96,73 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        
+        if collectionView == tableCollectionView{
+            print(cards.count)
             return cards.count
-        
-        
+        }else if collectionView == tableCollection2 {
+            print(cards2.count)
+            return cards2.count
+        }else  {
+            print(cards3.count)
+            return cards3.count
+        }
+    
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCollectionViewCell", for: indexPath) as! imageCollectionViewCell
-        
-        let card = cards[indexPath.row]
-        
-        
+
         if collectionView == tableCollection2 {
            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCollectionViewCell", for: indexPath) as! imageCollectionViewCell
+            let card2 = cards2[indexPath.row]
             cell.imgImage.image = UIImage()
-            
-            
-            let url = URL(string: card.imageUrl!)
+            let url = URL(string: card2.imageUrl!)
             let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
             cell.imgImage.image = UIImage(data: data!)
             
-            
+            return cell
+
         } else if collectionView == tableCollectionView {
-           
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCollectionViewCell", for: indexPath) as! imageCollectionViewCell
             
             
+            let card = cards[indexPath.row]
             cell.imgImage.image = UIImage()
-            
-            
             let url = URL(string: card.imageUrl!)
-            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+            let data = try? Data(contentsOf: url!)
             cell.imgImage.image = UIImage(data: data!)
             
+            return cell
+            
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCollectionViewCell", for: indexPath) as! imageCollectionViewCell
             
             
-        } else if collectionView == tableCollection3 {
-            
+            let card3 = cards3[indexPath.row]
             cell.imgImage.image = UIImage()
-            
-            
-            let url = URL(string: card.imageUrl!)
-            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+
+            let url = URL(string: card3.imageUrl!)
+            let data = try? Data(contentsOf: url!)
             cell.imgImage.image = UIImage(data: data!)
+            
+            return cell
             
         }
             
-        return cell
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-         performSegue(withIdentifier: "showCardDetails", sender: cards[indexPath.row])
+        if collectionView == tableCollectionView{
+            performSegue(withIdentifier: "showCardDetails", sender: cards[indexPath.row])
+        }else if collectionView == tableCollection2 {
+            performSegue(withIdentifier: "showCardDetails", sender: cards2[indexPath.row])
+        }else if collectionView == tableCollection3 {
+            performSegue(withIdentifier: "showCardDetails", sender: cards3[indexPath.row])
+        }
+        
+        
     }
     
-    
-
-    
 }
-
-
-
-//
-//extension ViewController: UITableViewDataSource {
-//
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//
-//
-//        return cards.count
-//
-//    }
-//
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 1
-//    }
-//
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonCell") as? tableCell else {
-//            return UITableViewCell()
-//        }
-//
-//        let card = cards[indexPath.row]
-//
-//
-//
-//        //cell.nameLabel?.text = card.name
-//
-//
-//        cell.cardImage.image = UIImage()
-//
-//        let url = URL(string: card.imageUrl!)
-//        let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-//        cell.cardImage.image = UIImage(data: data!)
-//
-//        return cell
-//
-//    }
-//
-//}
-//
-//extension ViewController: UITableViewDelegate {
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        performSegue(withIdentifier: "showCardDetails", sender: cards[indexPath.row])
-//    }
-//}
-

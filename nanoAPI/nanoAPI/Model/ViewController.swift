@@ -14,18 +14,31 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     @IBOutlet weak var tableCollectionView: UICollectionView!
     
+    @IBOutlet weak var tableCollection2: UICollectionView!
+    
+    @IBOutlet weak var tableCollection3: UICollectionView!
+    
+    @IBOutlet weak var titleCollection1: UILabel!
+    @IBOutlet weak var titleCollection2: UILabel!
+    @IBOutlet weak var titleCollection3: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableCollectionView.delegate = self
         tableCollectionView.dataSource = self
         
+        tableCollection2.delegate = self
+        tableCollection2.dataSource = self
+        
+        tableCollection3.delegate = self
+        tableCollection3.dataSource = self
         
         if let url = URL(string: "https://api.pokemontcg.io/v1/cards"){
             let task = URLSession.shared.dataTask(with: url) { (data, request, err) in
                 if err == nil{
                     if let dadosRetorno = data {
-                        var poke = try? JSONDecoder().decode(TopLevel.self, from: dadosRetorno)
+                        let poke = try? JSONDecoder().decode(TopLevel.self, from: dadosRetorno)
 
                         for p in poke!.cards {
                             
@@ -41,7 +54,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                         
                         
                         
-                        DispatchQueue.main.async { self.tableCollectionView.reloadData() }
+                        DispatchQueue.main.async {
+                            self.tableCollectionView.reloadData()
+                            self.tableCollection2.reloadData()
+                            self.tableCollection3.reloadData()
+                            self.titleCollection1.text = "Pokemon 1"
+                            self.titleCollection2.text = "Pokemon 2"
+                            self.titleCollection3.text = "Pokemon 3"
+                        }
+
                     }
                 }
             }
@@ -63,22 +84,54 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(cards.count)
-        return cards.count
+        
+        
+            return cards.count
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCollectionViewCell", for: indexPath) as! imageCollectionViewCell
         
         let card = cards[indexPath.row]
         
-        cell.imgImage.image = UIImage()
         
-        
-        let url = URL(string: card.imageUrl!)
-        let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-        cell.imgImage.image = UIImage(data: data!)
-        
+        if collectionView == tableCollection2 {
+           
+            cell.imgImage.image = UIImage()
+            
+            
+            let url = URL(string: card.imageUrl!)
+            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+            cell.imgImage.image = UIImage(data: data!)
+            
+            
+        } else if collectionView == tableCollectionView {
+           
+            
+            
+            cell.imgImage.image = UIImage()
+            
+            
+            let url = URL(string: card.imageUrl!)
+            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+            cell.imgImage.image = UIImage(data: data!)
+            
+            
+            
+        } else if collectionView == tableCollection3 {
+            
+            cell.imgImage.image = UIImage()
+            
+            
+            let url = URL(string: card.imageUrl!)
+            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+            cell.imgImage.image = UIImage(data: data!)
+            
+        }
+            
         return cell
     }
     
